@@ -11,5 +11,5 @@ class Reservation extends Model
 
     protected $table = 'reservations';
 
-    protected $fillable = ['name', 'phone', 'email', 'adult', 'children', 'kids', 'date', 'time'];
+    protected $fillable = ['name', 'phone', 'email', 'adult', 'children', 'kids', 'date', 'time', 'status', 'payment_link', 'payment_approved'];
 }

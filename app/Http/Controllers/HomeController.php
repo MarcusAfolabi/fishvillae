@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hero;
+use App\Models\Menu;
+use App\Models\Reservation;
 use Illuminate\Support\Str;
 use App\Models\MenuCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\HeroRequest;
 use App\Http\Requests\MenuRequest;
-use App\Models\Menu;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ReservationRequest;
 
 class HomeController extends Controller
 {
@@ -109,5 +111,39 @@ class HomeController extends Controller
     {
         $menu->delete();
         return redirect()->back()->with('status', 'Deleted');
+    }
+
+    public function storeReservation(ReservationRequest $request)
+    {
+        $reservation = new Reservation();
+        $reservation->name = $request['name'];
+        $reservation->phone = $request['phone'];
+        $reservation->email = $request['email'];
+        $reservation->adult = $request['adult'];
+        $reservation->children = $request['children'];
+        $reservation->kids = $request['kids'];
+        $reservation->date = $request['date'];
+        $reservation->time = $request['time'];
+        $reservation->status = $request['status'];
+        $reservation->save();
+        return redirect()->back()->with('status', 'Received, One of our team is validating the availability of your date and time.');
+    }
+    public function updateReservation(ReservationRequest $request, Reservation $reservation)
+    {
+        $reservation = Reservation::findOrFail($reservation->id); 
+        $reservation->email = $request['email'];
+        $reservation->date = $request['date'];
+        $reservation->time = $request['time'];
+        $reservation->status = $request['status'];
+        $reservation->payment_link = $request['payment_link'];
+        $reservation->payment_approved = $request['payment_approved'];
+        $reservation->save();
+        return redirect()->route('reservations.index')->with('status', 'Updated. Notification sent to customer email!');
+    }
+    public function deleteReservation(Reservation $reservation)
+    {
+        $reservation->delete();
+        return redirect()->back()->with('status', 'Delete');
+
     }
 }

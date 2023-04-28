@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('kids');
             $table->string('date');
             $table->string('time');
+            $table->enum('status', ['pending', 'approved'])->default('pending');
+            $table->string('payment_link');
+            $table->string('payment_approved');
             $table->timestamps();
         });
     } 
