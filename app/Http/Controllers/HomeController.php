@@ -10,7 +10,6 @@ use App\Models\Subscriber;
 use App\Models\Reservation;
 use Illuminate\Support\Str;
 use App\Models\MenuCategory;
-use Illuminate\Http\Request;
 use App\Models\SupportCategory;
 use App\Http\Requests\HeroRequest;
 use App\Http\Requests\MenuRequest;
@@ -187,7 +186,6 @@ class HomeController extends Controller
         return view('verification.success');
     }
 
-
     public function deleteSubscriber(Subscriber $subscriber)
     {
         $subscriber->delete();
@@ -249,7 +247,7 @@ class HomeController extends Controller
         $support->save();
         return redirect()->back()->with('status', 'Updated');
     }
-    
+
     public function deleteSupport(Support $support)
     {
         Storage::disk('public')->delete([
