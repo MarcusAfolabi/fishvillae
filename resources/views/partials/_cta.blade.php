@@ -4,7 +4,7 @@
 				<div class="col-lg-9 col-md-12">
 					<div class="pq-section-title-style-1 mb-0">
 						<span class="pq-section-sub-title">need a table on FishVillaé food house</span>
-						<h5 class="pq-section-title">booking table for family member</h5>
+						<h5 class="pq-section-title">booking table for love ones</h5>
 						<div class="pq-section-svg"></div>
 					</div>
 				</div>

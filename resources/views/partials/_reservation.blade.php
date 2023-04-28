@@ -341,13 +341,22 @@
 						<form class="pq-applyform" novalidate>
 							<div class="row">
 								<div class="col-lg-12">
-									<input type="text" size="40" placeholder="Your Name" required>
+									<input type="text" size="40" placeholder="Your Name or Host name" required>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-6">
 									<input type="text" size="40" placeholder="Your Phone" required>
 								</div>
-								<div class="col-lg-12">
-									<input type="text" size="40" placeholder="Persons" required>
+								<div class="col-lg-6">
+									<input type="text" size="40" placeholder="Your Email" required>
+								</div>
+								<div class="col-lg-4">
+									<input type="text" size="40" placeholder="No. of Adult" required>
+								</div>
+								<div class="col-lg-4">
+									<input type="text" size="40" placeholder="No. of Children" required>
+								</div>
+								<div class="col-lg-4">
+									<input type="text" size="40" placeholder="No. of Kids" required>
 								</div>
 								<div class="col-lg-12">
 									<input type="date" placeholder="dd-mm-yyyy">

@@ -18,7 +18,7 @@
 									<div class="pq-fancy-box-info">
 										<h5 class="pq-fancy-box-title">Home Delivery</h5>
 										<div class="pq-fancy-box-content">
-											<p class="pq-fancybox-description m-0">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+											<p class="pq-fancybox-description m-0">Is fast and reliable, ensuring that customers receive their food in a timely manner.</p>
 										</div>
 									</div>
 									<div class="pq-btn-container">
@@ -42,7 +42,7 @@
 									<div class="pq-fancy-box-info">
 										<h5 class="pq-fancy-box-title">Home Chefs</h5>
 										<div class="pq-fancy-box-content">
-											<p class="pq-fancybox-description m-0">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+											<p class="pq-fancybox-description m-0">Highly skilled and can prepare a wide variety of dishes, tailored to your specific preferences and dietary needs.</p>
 										</div>
 									</div>
 									<div class="pq-btn-container">
@@ -66,7 +66,7 @@
 									<div class="pq-fancy-box-info">
 										<h5 class="pq-fancy-box-title">Event Chefs</h5>
 										<div class="pq-fancy-box-content">
-											<p class="pq-fancybox-description m-0">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+											<p class="pq-fancybox-description m-0">We provide a bespoke menu, designed to suit the occasion and the preferences of the guests.</p>
 										</div>
 									</div>
 									<div class="pq-btn-container">
@@ -90,7 +90,7 @@
 									<div class="pq-fancy-box-info">
 										<h5 class="pq-fancy-box-title">Booking Packages</h5>
 										<div class="pq-fancy-box-content">
-											<p class="pq-fancybox-description m-0">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+											<p class="pq-fancybox-description m-0">Designed to provide customers with an all-inclusive experience, and so much more to offer.</p>
 										</div>
 									</div>
 									<div class="pq-btn-container">

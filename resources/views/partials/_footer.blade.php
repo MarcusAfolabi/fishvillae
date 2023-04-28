@@ -8,7 +8,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<img src="images/footer-logo/FishVillaé_logo.png" class="pq-footer-logo" alt="FishVillaé-footer-logo">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget rhoncus consectetur enim.</p>
+										<p>Fish Villaé is a recreation and relaxation centre for travellers and its neighbourhood. It is equipped for visitors, festive holidays, hosting conferences, hosting dinner – (Birthday, Get-together).</p>
 									</div>
 								</div>
 								<div class="col-sm-12">
