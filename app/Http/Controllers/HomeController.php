@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Hero;
 use App\Models\Menu;
+use App\Mail\VerifyEmail;
+use App\Models\Subscriber;
 use App\Models\Reservation;
 use Illuminate\Support\Str;
 use App\Models\MenuCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\HeroRequest;
 use App\Http\Requests\MenuRequest;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SubscriberRequest;
 use App\Http\Requests\ReservationRequest;
 
 class HomeController extends Controller
@@ -130,7 +134,7 @@ class HomeController extends Controller
     }
     public function updateReservation(ReservationRequest $request, Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($reservation->id); 
+        $reservation = Reservation::findOrFail($reservation->id);
         $reservation->email = $request['email'];
         $reservation->date = $request['date'];
         $reservation->time = $request['time'];
@@ -144,6 +148,25 @@ class HomeController extends Controller
     {
         $reservation->delete();
         return redirect()->back()->with('status', 'Delete');
+    }
 
+    public function storeSubscriber(SubscriberRequest $request)
+    {
+        $subscriber = new Subscriber();
+        $subscriber->email = $request['email'];
+        $subscriber->save();
+
+        $token = Str::random(60);
+        $subscriber->verification_token = $token;
+        $subscriber->save();
+
+        Mail::to($subscriber->email)->send(new VerifyEmail($subscriber));
+        return redirect()->back()->with('status', 'Thank you, Verification link has been sent to your email');
+    }
+
+    public function deleteSubscriber(Subscriber $subscriber)
+    {
+        $subscriber->delete();
+        return redirect()->back()->with('status', 'Delete');
     }
 }

@@ -11,7 +11,9 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->boolean('verified')->default(false);
+            $table->string('verification_token')->nullable();
             $table->timestamps();
         });
     } 
