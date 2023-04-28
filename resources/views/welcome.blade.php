@@ -79,5 +79,4 @@
 	<script src="js/map-chart.js" rel="preload" as="script"></script>
 	<script src="js/custom.js" rel="preload" as="script"></script>
 </body>
-
 </html>

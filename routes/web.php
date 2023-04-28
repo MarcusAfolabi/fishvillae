@@ -2,21 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WelcomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(WelcomeController::class)->group(function () {
+    Route::get('/', 'index')->name('welcome');
+    Route::get('/dashboard', 'dashboard')->name('dashboard.index');
+    Route::get('/menu-list', 'menu')->name('menu.index');
+    Route::get('/menu-category', 'menuCategory')->name('menu.category');
 });
 
 Route::get('/verify-email/{verificationToken}', [HomeController::class, 'verifySubscriber'])->name('subscriber.verify');
-
