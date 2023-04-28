@@ -17,7 +17,7 @@ class HeroRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:100'],
-            'slug' => ['sometimes', 'string', 'max:100'],
+            'slug' => ['sometimes', 'string'],
             'subtitle' => ['sometimes', 'string', 'max:60'],
             'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],            
         ];

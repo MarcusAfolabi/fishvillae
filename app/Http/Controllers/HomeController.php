@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Hero;
 use App\Models\Menu;
+use App\Models\Support;
 use App\Mail\VerifyEmail;
 use App\Models\Subscriber;
 use App\Models\Reservation;
 use Illuminate\Support\Str;
 use App\Models\MenuCategory;
 use Illuminate\Http\Request;
+use App\Models\SupportCategory;
 use App\Http\Requests\HeroRequest;
 use App\Http\Requests\MenuRequest;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\SupportRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SubscriberRequest;
 use App\Http\Requests\ReservationRequest;
-use App\Models\SupportCategory;
 
 class HomeController extends Controller
 {
@@ -51,7 +53,7 @@ class HomeController extends Controller
     public function deleteHero(Hero $hero)
     {
         Storage::disk('public')->delete([
-            str_replace('storage/', '', $hero->logo),
+            str_replace('storage/', '', $hero->image),
         ]);
         $hero->delete();
         return redirect()->back()->with('status', 'Deleted');
@@ -114,6 +116,9 @@ class HomeController extends Controller
     }
     public function deleteMenu(Menu $menu)
     {
+        Storage::disk('public')->delete([
+            str_replace('storage/', '', $menu->image),
+        ]);
         $menu->delete();
         return redirect()->back()->with('status', 'Deleted');
     }
@@ -210,5 +215,47 @@ class HomeController extends Controller
     {
         $supportCategory->delete();
         return redirect()->back()->with('status', 'Deleted');
+    }
+
+    public function storeSupport(SupportRequest $request)
+    {
+        $support = new Support();
+        $support->title = $request['title'];
+        $support->slug = Str::slug($request['title'], '-');
+        $support->title = $request['support_category'];
+        $support->title = $request['subtitle'];
+        $support->title = $request['content'];
+
+        if ($request->hasFile('image')) {
+            $support->image = 'storage/' . $request->file('image')->store('supportImages', 'public');
+        }
+        $support->save();
+        return redirect()->back()->with('status', 'Created');
+    }
+
+    public function updateSupport(SupportRequest $request, Support $support)
+    {
+        $support = Support::findOrFail($support->id);
+        $support->title = $request['title'];
+        $support->slug = Str::slug($request['title'], '-');
+        $support->title = $request['support_category'];
+        $support->title = $request['subtitle'];
+        $support->title = $request['content'];
+
+        if ($request->hasFile('image')) {
+            Storage::delete($support->image);
+            $support->image = 'storage/' . $request->file('image')->store('supportImages', 'public');
+        }
+        $support->save();
+        return redirect()->back()->with('status', 'Updated');
+    }
+    
+    public function deleteSupport(Support $support)
+    {
+        Storage::disk('public')->delete([
+            str_replace('storage/', '', $support->image),
+        ]);
+        $support->delete();
+        return redirect()->back()->with('status', 'Updated');
     }
 }

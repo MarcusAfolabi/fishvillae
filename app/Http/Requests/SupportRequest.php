@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MenuRequest extends FormRequest
+class SupportRequest extends FormRequest
 {
-     
+    
     public function authorize(): bool
     {
         return true;
@@ -16,12 +16,13 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'unique:menus', 'max:100'],
+            'support_category' => ['sometimes', 'string', 'max:100'],
+            'title' => ['sometimes', 'string', 'unique:supports', 'max:100'],
+            'subtitle' => ['sometimes', 'string', 'max:100'],
             'slug' => ['sometimes', 'string'],
-            'description' => ['required', 'string', 'max:1000'],
-            'price' => ['required', 'numeric', 'max:6'],
-            'menu_category' => ['required', 'string', 'max:100'],
+            'content' => ['sometimes', 'string', 'max:100'],
             'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            
         ];
     }
 }

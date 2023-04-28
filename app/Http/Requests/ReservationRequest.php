@@ -17,7 +17,7 @@ class ReservationRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string', 'max:100'],
-            'phone' => ['sometimes', 'string', 'max:100'],
+            'phone' => ['sometimes', 'numeric'],
             'email' => ['sometimes', 'email', 'valid_email', 'max:100'],
             'adult' => ['sometimes', 'string', 'max:100'],
             'children' => ['sometimes', 'string', 'max:100'],
