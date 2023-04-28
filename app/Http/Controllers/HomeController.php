@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SubscriberRequest;
 use App\Http\Requests\ReservationRequest;
+use App\Models\SupportCategory;
 
 class HomeController extends Controller
 {
@@ -157,34 +158,57 @@ class HomeController extends Controller
         $subscriber->email = $request['email'];
         $subscriber->verification_token = $verificationToken;
         $subscriber->save();
-    
+
         Mail::to($subscriber->email)->send(new VerifyEmail($verificationToken));
-    
+
         return redirect()->back()->with('status', 'Thank you! Please check your email to verify your subscription.');
     }
-    
+
     public function verifySubscriber($verificationToken)
     {
         $subscriber = Subscriber::where('verification_token', $verificationToken)->firstOrFail();
-    
+
         $expires = request('expires');
         if ($expires && now()->timestamp > $expires) {
             // Verification link has expired
             return view('verification.expired');
         }
-    
+
         // Mark the subscriber as verified
         $subscriber->verified = true;
         $subscriber->verification_token = null;
         $subscriber->save();
-    
+
         return view('verification.success');
     }
-    
+
 
     public function deleteSubscriber(Subscriber $subscriber)
     {
         $subscriber->delete();
         return redirect()->back()->with('status', 'Delete');
+    }
+
+    public function storeSupportCategory(MenuRequest $request)
+    {
+        $supportCategory = new SupportCategory();
+        $supportCategory->title = $request['title'];
+        $supportCategory->slug = Str::slug($request['title'], '-');
+        $supportCategory->save();
+        return redirect()->back()->with('status', 'Created');
+    }
+
+    public function updateSupportCategory(MenuRequest $request, SupportCategory $supportCategory)
+    {
+        $supportCategory = SupportCategory::findOrFail($supportCategory->id);
+        $supportCategory->title = $request['title'];
+        $supportCategory->slug = Str::slug($request['title'], '-');
+        $supportCategory->save();
+        return redirect()->route('supportCategory.index')->with('status', 'Updated');
+    }
+    public function deleteSupportCategory(SupportCategory $supportCategory)
+    {
+        $supportCategory->delete();
+        return redirect()->back()->with('status', 'Deleted');
     }
 }
