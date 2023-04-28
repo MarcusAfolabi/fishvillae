@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/verify-email/{token}', function ($token) {
-    $subscriber = App\Models\Subscriber::where('verification_token', $token)->firstOrFail();
-    $subscriber->verified = true;
-    $subscriber->verification_token = null;
-    $subscriber->save();
-    return redirect('/')->with('status', 'Your email has been verified!');
-})->name('verify.email');
+Route::get('/verify-email/{verificationToken}', [HomeController::class, 'verifySubscriber'])->name('subscriber.verify');
+

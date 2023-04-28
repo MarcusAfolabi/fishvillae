@@ -23,7 +23,7 @@ class VerifyEmail extends Mailable
 
     public function build()
     {
-        $url = route('verify.email', ['token' => $this->subscriber->verification_token]);
+        $url = route('verify.email', ['token' => $this->subscriber->verification_token] . '?expires=' . now()->addDay()->timestamp);
 
         return $this->view('emails.verify-email')
             ->with(['url' => $url]);

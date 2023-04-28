@@ -152,17 +152,35 @@ class HomeController extends Controller
 
     public function storeSubscriber(SubscriberRequest $request)
     {
+        $verificationToken = Str::random(32); // Generate a random verification token
         $subscriber = new Subscriber();
         $subscriber->email = $request['email'];
+        $subscriber->verification_token = $verificationToken;
         $subscriber->save();
-
-        $token = Str::random(60);
-        $subscriber->verification_token = $token;
-        $subscriber->save();
-
-        Mail::to($subscriber->email)->send(new VerifyEmail($subscriber));
-        return redirect()->back()->with('status', 'Thank you, Verification link has been sent to your email');
+    
+        Mail::to($subscriber->email)->send(new VerifyEmail($verificationToken));
+    
+        return redirect()->back()->with('status', 'Thank you! Please check your email to verify your subscription.');
     }
+    
+    public function verifySubscriber($verificationToken)
+    {
+        $subscriber = Subscriber::where('verification_token', $verificationToken)->firstOrFail();
+    
+        $expires = request('expires');
+        if ($expires && now()->timestamp > $expires) {
+            // Verification link has expired
+            return view('verification.expired');
+        }
+    
+        // Mark the subscriber as verified
+        $subscriber->verified = true;
+        $subscriber->verification_token = null;
+        $subscriber->save();
+    
+        return view('verification.success');
+    }
+    
 
     public function deleteSubscriber(Subscriber $subscriber)
     {
