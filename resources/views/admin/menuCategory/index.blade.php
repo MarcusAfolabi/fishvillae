@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('main')
-@section('title', 'Admin - Fishvillae')
+@section('title', 'Menu Category - Fishvillae')
 <div id="main" class="layout-column flex">
     <div id="header" class="page-header">
         <div class="navbar navbar-expand-lg">
@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div id="content" class="flex">
-        <div>
+    <div id="content" class="flex"> 
+    <div>
             <div class="page-hero page-container" id="page-hero">
                 <div class="padding d-flex">
                     <div class="page-title">
@@ -26,7 +26,7 @@
                     </div>
                     @if (session('status'))
                     <div class="btn btn-sm box-shadows btn-rounded gd-primary text-white"> <i data-feather="check"></i> {{ session('status') }} </div>
-                    @endif
+                    @endif 
                     @if($errors->any())
                     <div class="btn btn-sm box-shadows btn-rounded gd-danger text-white">
                         <ul> @foreach($errors->all() as $error) <li><i data-feather="x"></i>{{ $error }}</li> @endforeach </ul>
@@ -34,38 +34,10 @@
                     @endif
 
                     <div class="flex"></div>
-                    <div><a href="#" title="add new menu" data-toggle="modal" data-target="#modal" class="btn btn-sm box-shadows btn-rounded gd-primary text-white"><span class="d-sm-inline mx-1"> </span> <i data-feather="plus-circle"></i>&nbsp;Menu</a></div>
+                    <div><a href="#" title="add new menu" data-toggle="modal" data-target="#modal" class="btn btn-sm box-shadows btn-rounded gd-primary text-white"><span class="d-sm-inline mx-1"> </span> <i data-feather="plus-circle"></i>&nbsp;Category</a></div>
                 </div>
             </div>
-            <div class="page-content page-container" id="page-content">
-                <div class="padding">
-                    <div class="row row-sm sr">
-                        <div class="col-md-12 d-flex">
-                            <div class="card flex">
-                                <div class="card-body">
-                                    <div class="row row-sm">
-                                        <div class="col-sm-6">
-                                            <div class="mb-2"><small class="text-muted">Overview</small></div>
-                                            <div class="row row-sm">
-                                                <div class="col-4">
-                                                    <div class="text-highlight text-md">52</div><small>Menu</small>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="text-danger text-md">+15</div><small>Reservations</small>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="text-md">45.5%</div><small>Subscribers</small>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+             
         </div>
         <div class="page-content page-container" id="page-content">
             <div class="padding">
@@ -74,9 +46,7 @@
                     <thead>
                         <tr>
                             <th data-sortable="true" data-field="id">ID</th>
-                            <th data-sortable="true" data-field="owner">Image</th>
-                            <th data-sortable="true" data-field="project">Menu name</th>
-                            <th data-field="task"><span class="d-none d-sm-block">Price</span></th>
+                            <th data-sortable="true" data-field="project">Category name</th>
                             <th data-field="task"><span class="d-none d-sm-block">Edit</span></th>
                             <th data-field="finish"><span class="d-none d-sm-block">Delete</span></th>
                             <th></th>
@@ -84,16 +54,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($menus as $menu)
+                        @forelse($menu_categories as $category)
                         <tr class="" data-id="20">
-                            <td style="min-width:30px;text-align:center"><small class="text-muted">{{ $menu->id }}</small>
+                            <td style="min-width:30px;text-align:center"><small class="text-muted">{{ $category->id }}</small>
                             </td>
-                            <td>  <img src="{{ asset($menu->image) }}" width="50" height="50" class="rounded-lg" /> </td>
-                            <td class="flex"><a href="#" class="item-title text-color">{{ $menu->title }} </a>
-                                <div class="item-except text-muted text-sm h-1x">{{ $menu->description }}</div>
+                            <td class="flex"><a href="#" class="item-title text-color"> {{ $category->title }}</a> 
                             </td>
-                            <td><span class="item-amount d-none d-sm-block text-sm">N{{ $menu->price }}</span></td>
-                            <td><span class="item-amount d-none d-sm-block text-sm [object Object]">20</span>
+                            <td><span class="item-amount d-none d-sm-block text-sm">Edit</span></td>
+                            <td><span class="item-amount d-none d-sm-block text-sm [object Object]">Delete</span>
                             </td>
                             <td>
                                 <div class="item-action dropdown"><a href="#" data-toggle="dropdown" class="text-muted"><i data-feather="more-vertical"></i></a>
@@ -116,28 +84,14 @@
     <div class="modal-dialog">
         <div class="modal-content text-left box-shadow mb-4 bg-white">
             <div class="modal-header">
-                <div class="modal-title text-md">Add new menu list</div><button class="close" data-dismiss="modal">×</button>
+                <div class="modal-title text-md">Add new menu category</div><button class="close" data-dismiss="modal">×</button>
             </div>
-            <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('menuCategory.store') }}" method="POST">
                 @csrf
                 <div class="modal-body bg-dark">
-                    <div class="form-group"><label class="col-sm-4 col-form-label">Name</label>
+                    <div class="form-group"><label class="col-sm-4 col-form-label">Title</label>
                         <div class="col-sm-12"><input required type="text" id="item" name="title" class="form-control"></div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-4 col-form-label">Description</label>
-                        <div class="col-sm-12"><textarea required name="description" rows="3" placeholder="Describe it" type="text" class="form-control"> </textarea> </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-4 col-form-label">Price</label>
-                        <div class="col-sm-12"><input required type="number" name="price" placeholder="N" class="form-control"></div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-4 col-form-label">Category</label>
-                        <div class="col-sm-12"><select required name="menu_category" class="form-control">
-                                @foreach($menu_categories as $cat) <option value="{{ $cat->id }}">{{ $cat->title }}</option>@endforeach
-                            </select></div>
-                    </div>
-                    <div class="custom-file"><input required type="file" name="image" class="custom-file-input" id="menu-image">
-                        <label class="custom-file-label" for="menu-image">Choose file</label>
-                    </div>
+                    </div>  
                 </div>
                 <div class="modal-footer"><button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-dark">Save Menu</button>

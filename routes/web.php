@@ -13,4 +13,9 @@ Route::controller(WelcomeController::class)->group(function () {
     Route::get('/menu-category', 'menuCategory')->name('menu.category');
 });
 
+Route::controller(HomeController::class)->group(function (){
+    Route::post('/menu-save', 'storeMenu')->name('menu.store');
+    Route::post('/menu-category-save', 'storeMenuCategory')->name('menuCategory.store');
+});
+
 Route::get('/verify-email/{verificationToken}', [HomeController::class, 'verifySubscriber'])->name('subscriber.verify');

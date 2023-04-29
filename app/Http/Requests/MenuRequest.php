@@ -19,7 +19,7 @@ class MenuRequest extends FormRequest
             'title' => ['required', 'string', 'unique:menus', 'max:100'],
             'slug' => ['sometimes', 'string'],
             'description' => ['required', 'string', 'max:1000'],
-            'price' => ['required', 'numeric', 'max:6'],
+            'price' => ['required', 'numeric'],
             'menu_category' => ['required', 'string', 'max:100'],
             'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];

@@ -12,7 +12,7 @@
             <div class="nav-active-text-primary" data-nav>
                 <ul class="nav bg">
                     <li class="nav-header hidden-folded"><span class="text-muted">Main</span></li>
-                    <li><a href="dashboard.html"><span class="nav-icon text-primary"><i data-feather="home"></i></span> <span class="nav-text">Dashboard</span></a></li>
+                    <li><a href="{{ route('dashboard.index') }}"><span class="nav-icon text-primary"><i data-feather="home"></i></span> <span class="nav-text">Dashboard</span></a></li>
                     <li class="nav-header hidden-folded"><span class="text-muted">To Dos</span></li>
                     <li><a href="app.user.html"><span class="nav-icon text-success"><i data-feather="users"></i></span> <span class="nav-text">Users</span></a></li>
                     <li><a href="app.message.html"><span class="nav-icon text-warning"><i data-feather="message-circle"></i></span> <span class="nav-text">Messages</span> <span class="nav-badge"><b class="badge-circle xs text-warning"></b></span></a></li>
@@ -34,8 +34,8 @@
                 <ul class="nav">
                     <li><a href="#" class=""><span class="nav-icon"><i data-feather="grid"></i></span> <span class="nav-text">Menu</span> <span class="nav-caret"></span></a>
                         <ul class="nav-sub nav-mega">
-                            <li><a href="ui.alert.html" class=""><span class="nav-text">Menu List</span></a></li>
-                            <li><a href="ui.badge.html" class=""><span class="nav-text">Menu Categories</span></a></li>
+                            <li><a href="{{ route('menu.index') }}" class=""><span class="nav-text">Menu List</span></a></li>
+                            <li><a href="{{ route('menu.category') }}" class=""><span class="nav-text">Menu Categories</span></a></li>
                         </ul>
                     </li>
                 </ul>

@@ -21,6 +21,7 @@ use App\Http\Requests\ReservationRequest;
 
 class HomeController extends Controller
 {
+    
     public function storeHero(HeroRequest $request)
     {
         $hero = new Hero;
@@ -64,7 +65,7 @@ class HomeController extends Controller
         $menuCategory->title = $request['title'];
         $menuCategory->slug = Str::slug($request['title'], '-');
         $menuCategory->save();
-        return redirect()->route('category.index')->with('status', 'Menu Category created successfully!');
+        return redirect()->route('menu.category')->with('status', 'Added !');
     }
 
     public function updateMenuCategory(HeroRequest $request, MenuCategory $menuCategory)
